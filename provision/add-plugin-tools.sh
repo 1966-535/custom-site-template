@@ -42,6 +42,7 @@ if [[ $? -eq 0 && ${file_out} ]]; then
  curl -o ./email-log.2.2.0.zip ${WP_URL}'/email-log.2.2.0.zip'
  curl -o ./query-monitor.2.15.0.zip ${WP_URL}'/query-monitor.2.15.0.zip'
  curl -o ./wordpress-mu-domain-mapping.0.5.5.1.zip ${WP_URL}'/wordpress-mu-domain-mapping.0.5.5.1.zip'
+ curl -o ./multisite-clone-duplicator.1.4.1.zip ${WP_URL}'/multisite-clone-duplicator.1.4.1.zip'
 
  # Unzip all files
  # unzip *.zip

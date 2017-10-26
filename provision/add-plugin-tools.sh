@@ -1,5 +1,6 @@
 #!/bin/bash
 # This file loads all needed plugins and theme(s).
+# Author : Obi Merenu
 
 REPO_GH='git@github.com:'
 PLUGIN_DIR='../public_html/wp-content/plugins'

@@ -1,5 +1,5 @@
 #!/bin/bash
-# This file loads all needed plugins and theme(s).
+# This file installs all needed plugins and theme(s).
 # Author : Obi Merenu
 
 REPO_GH='git@github.com:'

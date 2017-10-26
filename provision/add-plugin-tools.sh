@@ -3,6 +3,7 @@
 # Author : Obi Merenu
 
 REPO_GH='git@github.com:'
+REPO_GL='git@gitlab.com:'
 PLUGIN_DIR='../public_html/wp-content/plugins'
 THEME_DIR='../public_html/wp-content/themes'
 WP_URL='https://downloads.wordpress.org/plugin'
@@ -18,6 +19,8 @@ if [ -d ${PLUGIN_DIR} ]; then
     # Add base Theme
     git clone ${REPO_GH}Metumaribe/timber-bootstrap.git ${THEME_DIR}/timber-bootstrap
     # Add base Plugins
+    git clone ${REPO_GL}owllabs/metumaribe-utility.git ${PLUGIN_DIR}/metumaribe-utility
+    git clone ${REPO_GL}qasa/deals-wordpress-plugin.git ${PLUGIN_DIR}/deals-wordpress-plugin
     git clone ${REPO_GH}Metumaribe/easy-digital-downloads.git ${PLUGIN_DIR}/easy-digital-downloads
     git clone ${REPO_GH}Metumaribe/WordPress-Admin-Style.git ${PLUGIN_DIR}/WordPress-Admin-Style
     git clone ${REPO_GH}Metumaribe/wp-redis.git ${PLUGIN_DIR}/wp-redis

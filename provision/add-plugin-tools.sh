@@ -1,20 +1,22 @@
 #!/bin/bash
-# This file installs all needed plugins and theme(s).
+# This file installs all needed plugins and theme(s)...and some dev dependencies.
 # Author : Obi Merenu
 
 REPO_GH='git@github.com:'
 REPO_GL='git@gitlab.com:'
+WP_DIR='../public_html'
 PLUGIN_DIR='../public_html/wp-content/plugins'
 THEME_DIR='../public_html/wp-content/themes'
 WP_URL='https://downloads.wordpress.org/plugin'
 
+# check if its the wordpress dir : @todo concatenate wp-config.php to $WP_DIR.
+if [ -d ${WP_DIR} ]; then
 
-if [ -d ${PLUGIN_DIR} ]; then
-    # delete submodules first @todo add a check for presence of submodules
-    # deinit all submodules from .gitmodules
-
-    # Delete the plugins
+    # Clean up the plugins dir : removes the basic plugins that i don't use.
     rm -rf ${PLUGIN_DIR}/*
+    
+    # Add unit / integration test tools for TravisCI.
+    git clone ${REPO_GH}Metumaribe/wp-tests.git ${WP_DIR}/wp-tests  # phpunit test for themes and plugins
 
     # Add base Theme
     git clone ${REPO_GH}Metumaribe/timber-bootstrap.git ${THEME_DIR}/timber-bootstrap
@@ -29,7 +31,12 @@ else
     echo "${PLUGIN_DIR} doesn't exists"
 fi
 
-# Install from WordPress.org
+
+# move the test files into the rootl
+# ${WP_DIR}/wp-tests
+
+
+# Install plugins from WordPress.org
 cd ${PLUGIN_DIR}
 
 file_out=$(curl -o ./timber-library.zip ${WP_URL}'/timber-library.zip' 2>&1)

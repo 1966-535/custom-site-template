@@ -1,4 +1,8 @@
 
 /log/
 /provision/vvv-nginx.conf
+# Ignore entire application
 /public_html
+
+# Ignore plugins
+# /public_html/wp-content/plugins

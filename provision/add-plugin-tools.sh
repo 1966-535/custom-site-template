@@ -14,9 +14,6 @@ if [ -d ${WP_DIR} ]; then
 
     # Clean up the plugins dir : removes the basic plugins that i don't use.
     rm -rf ${PLUGIN_DIR}/*
-    
-    # Add unit / integration test tools for TravisCI.
-    git clone ${REPO_GH}Metumaribe/wp-tests.git ${WP_DIR}/wp-tests  # phpunit test for themes and plugins
 
     # Add base Theme
     git clone ${REPO_GH}Metumaribe/timber-bootstrap.git ${THEME_DIR}/timber-bootstrap

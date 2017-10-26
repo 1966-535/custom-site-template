@@ -1,0 +1,44 @@
+sudo: true
+
+language:
+    - php
+    - node_js
+
+php:
+    - 7.0
+    - 5.6
+
+env:
+  global:
+  - WP_MULTISITE=1
+  - PHANTOMJS_CDNURL='http://files.urldocs.com/share/phantomjs'
+  - SITE_UUID='ecc3a39c-c44t4t7-415b-4c-b00f58e1eb69'
+  #- ENCRYPTION_LABEL: 88rjnfi18b1
+
+branches:
+    only:
+      - master
+before_install:
+    - nvm install stable
+    #- openssl aes-256-cbc -K $encrypted_889a2dd018b1_key -iv $encrypted_889a2dd018b1_iv
+     # -in dev-scripts/github_deploy_key.enc -out dev-scripts/github_deploy_key -d
+    - WP_VERSION=$( cat ./wp-includes/version.php | grep 'wp_version =' | grep -oE '[0-9][0-9]*\.[0-9][0-9]*(\.[0-9][0-9]*)*(-[0-9a-z]*)*'
+      )
+    - echo "WP_VERSION=$WP_VERSION"
+install:
+    - export DEV_LIB_PATH=dev-lib
+    - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname
+      $( readlink .travis.yml ) ); fi
+    - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/Metumaribe/wp-dev-lib.git
+      $DEV_LIB_PATH; fi
+    - set -x
+    - source $DEV_LIB_PATH/travis.install.sh
+
+
+script:
+    - source $DEV_LIB_PATH/travis.script.sh
+    #- source dev-scripts/builder.sh
+after_script:
+    - source $DEV_LIB_PATH/travis.after_script.sh
+
+

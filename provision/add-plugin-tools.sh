@@ -3,6 +3,7 @@
 # Author : Obi Merenu
 
 REPO_GH='git@github.com:'
+REPO_GH_HTTP='https://github.com'
 REPO_GL='git@gitlab.com:'
 WP_DIR='../public_html'
 PLUGIN_DIR='../public_html/wp-content/plugins'
@@ -23,22 +24,20 @@ if [ -d ${WP_DIR} ]; then
     git clone ${REPO_GH}Metumaribe/easy-digital-downloads.git ${PLUGIN_DIR}/easy-digital-downloads
     git clone ${REPO_GH}Metumaribe/WordPress-Admin-Style.git ${PLUGIN_DIR}/WordPress-Admin-Style
     git clone ${REPO_GH}Metumaribe/wp-redis.git ${PLUGIN_DIR}/wp-redis
-
+     
 else
     echo "${PLUGIN_DIR} doesn't exists"
 fi
 
+cd ${WP_DIR}
 
-# move the test files into the rootl
-# ${WP_DIR}/wp-tests
-
-
-# Install plugins from WordPress.org
-cd ${PLUGIN_DIR}
-
-file_out=$(curl -o ./timber-library.zip ${WP_URL}'/timber-library.zip' 2>&1)
+file_out=$(curl -o ./WordPress-Bare.zip  ${REPO_GH_HTTP}'/Metumaribe/WordPress-Bare/archive/master.zip' 2>&1)
 
 if [[ $? -eq 0 && ${file_out} ]]; then
+
+ # Install plugins from WordPress.org
+ cd ${PLUGIN_DIR}
+
  # install debug files
  curl -o ./rewrite-rules-inspector.1.2.1.zip ${WP_URL}'/rewrite-rules-inspector.1.2.1.zip'
  curl -o ./wp-crontrol.1.5.zip ${WP_URL}'/wp-crontrol.1.5.zip'
@@ -47,6 +46,7 @@ if [[ $? -eq 0 && ${file_out} ]]; then
  curl -o ./query-monitor.2.15.0.zip ${WP_URL}'/query-monitor.2.15.0.zip'
  curl -o ./wordpress-mu-domain-mapping.0.5.5.1.zip ${WP_URL}'/wordpress-mu-domain-mapping.0.5.5.1.zip'
  curl -o ./multisite-clone-duplicator.1.4.1.zip ${WP_URL}'/multisite-clone-duplicator.1.4.1.zip'
+ curl -o ./timber-library.zip ${WP_URL}'/timber-library.zip'
 
  # Unzip all files
  # unzip *.zip

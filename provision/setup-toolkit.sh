@@ -12,8 +12,7 @@ THEME_DIR='../public_html/wp-content/themes'
 WP_URL='https://downloads.wordpress.org/plugin'
 WP_CONF='../public_html/wp-config.php'
 
-if [ ! -e ${WP_CONF} ]
-then
+if [ ! -e ${WP_CONF} ]; then
     echo "Wrong directory"
 else
     # Get 'WordPress-Bare' project files
@@ -26,12 +25,14 @@ fi
 
 # check if its the wordpress dir : @todo concatenate wp-config.php to $WP_DIR.
 if [ -d ${WP_DIR} ]; then
-
+    # Get 'WordPress-Bare' project files
+    curl -LJO  ${REPO_GH_HTTP}'/Metumaribe/WordPress-Bare/archive/master.zip'
+    unzip *.zip
+    cp -a WordPress-Bare-master/. ${WP_DIR}
+    rm -rf WordPress-Bare-master
+    rm -rf *.zip
     # Clean up the plugins dir : removes the basic plugins that i don't use.
     rm -rf ${PLUGIN_DIR}/*
-
-    # Add base Theme
-    git clone ${REPO_GH}Metumaribe/timber-bootstrap.git ${THEME_DIR}/timber-bootstrap
     # Add base Plugins
     git clone ${REPO_GL}owllabs/metumaribe-utility.git ${PLUGIN_DIR}/metumaribe-utility
     git clone ${REPO_GL}qasa/deals-wordpress-plugin.git ${PLUGIN_DIR}/deals-wordpress-plugin
@@ -41,6 +42,12 @@ if [ -d ${WP_DIR} ]; then
 
 else
     echo "${PLUGIN_DIR} doesn't exists"
+fi
+
+#
+if [ ! -d ${THEME_DIR}/timber-bootstrap ]; then
+    # Add base Theme
+    git clone ${REPO_GH}Metumaribe/timber-bootstrap.git ${THEME_DIR}/timber-bootstrap
 fi
 
 cd ${WP_DIR}
@@ -63,8 +70,10 @@ if [[ $? -eq 0 && ${file_out} ]]; then
  # Unzip all files unzip *.zip
  find ./ -name \*.zip -exec unzip {} \;
  rm -rf *.zip
- echo 'theses are your files.'
+ echo 'Plugin files.'
  ls -al
+ echo 'Theme files:'
+ ls -al ../themes
 
  rm -rf ${PLUGIN_DIR}/wp-crontrol/*
 fi

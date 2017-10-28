@@ -1,6 +1,7 @@
 #!/bin/bash
 # This file installs all needed plugins and theme(s)...and some dev dependencies.
 # Author : Obi Merenu
+# BUILD BRANCH
 
 set -e
 
